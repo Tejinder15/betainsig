@@ -56,7 +56,7 @@ if(isset($_POST['del'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insignia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="vendors/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/pictures.css">
 </head>
@@ -129,6 +129,12 @@ if(isset($_POST['del'])){
                      <button class="sav_act">
                          <i class="ion-ios-download-outline"></i>
                      </button>
+                     <div class="save-options">
+                         <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_id">
+                         <input type="hidden" value="<?php echo $allfile[$c]; //This Fetches Image id from Table?>" name="post_name">
+                         <button type="submit" name="save" class="svf_btn"><i class="ion-android-bookmark"></i> Save</button>
+                         <button type="submit" name="download" class="sv_btn"><i class="ion-ios-cloud-download"></i> Download</button>
+                     </div>
                  </div>
              </div>
          </div>
