@@ -109,10 +109,11 @@ if(isset($_POST['del'])){
              <div class="post-footer">
                  <div class="post-actions">
                      <div class="post-like">
-                         <button class="btn_act" type="submit">
-                             <input type="hidden" name="like" id="like" value="1">
-                             <i class="dill ion-android-favorite"></i>
+                       <form class="" action="" method="post">
+                         <button class="btn_act" type="submit" name="like">
+                           <i class="dill ion-android-favorite"></i>
                          </button>
+                       </form>
                      </div>
                      <div class="post-comment">
                          <button class="cmn_act" type="submit">
