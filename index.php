@@ -15,8 +15,7 @@ else{
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insignia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="vendors/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/home.css">
 </head>
@@ -36,63 +35,6 @@ else{
     </nav>
 
     <section class="main">
-        <div class="com-post">
-            <div class="post">
-                <div class="post-options">
-                    <div class="pic">
-                        <img src="" alt="">
-                    </div>
-                    <label for="" class="person">Username</label>
-                    <a href=""><i class="ion-android-more-vertical"></i></a>
-                </div>
-                <img src="" alt="retry">
-            </div>
-                <div class="post-detail">
-                    <a href=""><i class="ion-android-favorite-outline"></i></a>
-                    <a href=""><i class="ion-chatbubble-working"></i></a>
-                    <a href=""><i class="ion-android-share"></i></a>
-                    <a href=""><i class="ion-android-bookmark" style="float: right;"></i></a>
-
-                </div>
-        </div>
-
-        <div class="com-post">
-            <div class="post">
-                <div class="post-options">
-                    <div class="pic">
-                        <img src="" alt="">
-                    </div>
-                    <label for="" class="person">Username</label>
-                    <a href=""><i class="ion-android-more-vertical"></i></a>
-                </div>
-                <img src="" alt="retry">
-            </div>
-                <div class="post-detail">
-                    <a><i class="ion-android-favorite-outline"></i><a>
-                    <a href=""><i class="ion-chatbubble-working"></i></a>
-                    <a href=""><i class="ion-android-share"></i></a>
-                    <a href=""><i class="ion-android-bookmark" style="float: right;"></i></a>
-                </div>
-        </div>
-
-        <div class="com-post">
-            <div class="post">
-                <div class="post-options">
-                    <div class="pic">
-                        <img src="" alt="">
-                    </div>
-                    <label for="" class="person">Username</label>
-                    <a href=""><i class="ion-android-more-vertical"></i></a>
-                </div>
-                <img src="" alt="retry">
-            </div>
-                <div class="post-detail">
-                    <a href=""><i class="ion-android-favorite-outline"></i></a>
-                    <a href=""><i class="ion-ios-chatbubble-outline"></i></a>
-                    <a href=""><i class="ion-android-share"></i></a>
-                    <a href=""><i class="ion-android-bookmark" style="float: right;"></i></a>
-                </div>
-        </div>
     </section>
 </body>
 </html>
