@@ -152,7 +152,7 @@ if(isset($_POST['upload'])){
                 </div>
 
                 <div class="strength">
-                    <a href="Pictures.php?id=<?php echo $myid;?>"><b><?php if($total_post){ echo $total_post;}?></b>Posts</a>
+                    <a href="pictures.php?id=<?php echo $myid;?>"><b><?php if($total_post){ echo $total_post;}?></b>Posts</a>
                     <a href="Followers.php?id=<?php echo $myid;?>"><b><?php echo $num_of_followers;?></b>Followers</a>
                     <a href="Following.php?id=<?php echo $myid;?>"><b><?php echo $num_of_following;?></b>Following</a>
                 </div>
