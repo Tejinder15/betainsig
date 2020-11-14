@@ -179,6 +179,7 @@ nav {
 }
 
 .dill:hover {
+  font-size: 2.2rem;
   color: #f50057;
 }
 /*------Comments--------*/
@@ -197,6 +198,11 @@ nav {
   user-select: none;
 }
 
+.cmn_act:hover{
+  font-size: 2.2rem;
+  color: #fd9644;
+}
+
 /*--------Share--------*/
 .post-share {
   margin: 0.5rem;
@@ -210,6 +216,11 @@ nav {
   outline: none;
   font-size: 2rem;
   user-select: none;
+}
+
+.shr_act:hover{
+  font-size: 2.2rem;
+  color: #00ACEE;
 }
 
 /*--------Save--------*/
@@ -228,6 +239,11 @@ nav {
   outline: none;
   font-size: 2rem;
   user-select: none;
+}
+
+.sav_act:hover{
+  color: #20bf6b;
+  font-size: 2.2rem;
 }
 
 .sav_act:focus + .save-options {
