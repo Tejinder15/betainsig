@@ -207,7 +207,7 @@ if(isset($_POST['upload'])){
                 echo "<tr>";
                 for ($i=0; $i <$col && $c<$totalimages; $i++) {
                     ?>
-                    <div class="post"><a href="Pictures.php?id=<?php echo $myid;?>"><img src="<?php echo $direct. $allfile[$c];?>" width="100%" height="230"></a></div>
+                    <div class="post"><a href="pictures.php?id=<?php echo $myid;?>"><img src="<?php echo $direct. $allfile[$c];?>" width="100%" height="230"></a></div>
                     <?php
                     $c++;
                 }
