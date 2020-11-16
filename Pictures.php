@@ -42,10 +42,33 @@ if(isset($_POST['del'])){
     $del_query = mysqli_query($con,"DELETE from `posts` where `id`='$pid'");
     $update_total_post = mysqli_query($con,"UPDATE users set `num_posts`=`num_posts`-1 where `Id`='$mid'");
     unlink($direct.$pname);
-    header("Location:Pictures.php?id={$mid}");
+    header("Location:pictures.php?id={$mid}");
  }
  else{
      echo "";
+ }
+
+ // For Liking POST
+ if (isset($_POST['like'])) {
+   $poid = $_POST['post_like_id'];
+     $like_check = mysqli_query($con,"SELECT `User_id` from `likes` where `Id`='$poid'");
+     $like_check_result = mysqli_num_rows($like_check);
+     if($like_check_result == 1){
+        echo "Already Liked the Post";
+     }
+     else {
+       $pos_like = mysqli_query($con,"INSERT INTO likes(`Id`,`User_id`,`likes`) Values('$poid','$mid',1)");
+       $update_likes = mysqli_query($con,"UPDATE posts set `likes`=`likes`+1 where `id`='$poid'");
+       if($pos_like && $update_likes){
+         echo "You Liked the Post";
+       }
+       else{
+         echo "Could not Like the Photo";
+       }
+     }
+}
+ else{
+   echo "";
  }
 
 ?>
@@ -67,82 +90,88 @@ if(isset($_POST['del'])){
         </div>
     </nav>
     <div class="main">
-      <?php
-     if(isset($allfile)){
-         $totalimages = count($allfile);
-         $a = 0;
-         $c = -1;
-         for ($i=0;$i<$totalimages; $i++) {
-             $a++;
-             $c++;
-             ?>
-         <div class="post-conatiner">
-             <!-- For Displaying the Username and Profile -->
-             <div class="post-header">
-                 <div class="post-user">
-                     <div class="post-profile">
-                         <img src="<?php if(isset($dp))echo $dp;?>">
-                     </div>
-                     <div class="post-username">
-                         <label for="Username" class="person"><?php echo $myname;?></label>
-                     </div>
-                 </div>
-                 <!-- For Post Options -->
-                 <div class="post-options">
-                     <button class="dropbtn"><i class="op ion-android-more-vertical"></i></button>
-                     <div class="dropdown-content">
-                         <form action="">
-                         <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_id">
-                         <input type="hidden" value="<?php echo $allfile[$c]; //This Fetches Image id from Table?>" name="post_name">
-                         <input type="submit" value="Delete" name="del" class="del" data-id="<?php echo $pic_id[$c];?>"/>
-                         </form>
-                     </div>
-                 </div>
-             </div>
-             <!-- Post photo -->
-             <div class="post-photo">
-                 <form action="" method="POST" class="userpost">
-                     <img src="<?php echo $direct.$allfile[$c]; // This is for Fetching Images Name?>" alt="" class="post">
-                 </form>
-             </div>
-             <!-- Post sharing and like Options -->
-             <div class="post-footer">
-                 <div class="post-actions">
-                     <div class="post-like">
-                       <form class="" action="" method="post">
-                         <button class="btn_act" type="submit" name="like">
-                           <i class="dill ion-android-favorite"></i>
-                         </button>
-                       </form>
-                     </div>
-                     <div class="post-comment">
-                         <button class="cmn_act" type="submit">
-                             <i class="ion-chatbox-working"></i>
-                         </button>
-                     </div>
-                     <div class="post-share">
-                         <button class="shr_act">
-                             <i class="ion-paper-airplane"></i>
-                         </button>
-                     </div>
-                 </div>
-                 <div class="post-save">
-                     <button class="sav_act">
-                         <i class="ion-ios-download-outline"></i>
-                     </button>
-                     <div class="save-options">
-                         <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_id">
-                         <input type="hidden" value="<?php echo $allfile[$c]; //This Fetches Image id from Table?>" name="post_name">
-                         <button type="submit" name="save" class="svf_btn"><i class="ion-android-bookmark"></i> Save</button>
-                         <button type="submit" name="download" class="sv_btn"><i class="ion-ios-cloud-download"></i> Download</button>
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <?php
-         }
-     }
-     ?>
+                <?php
+            if(isset($allfile)){
+                $totalimages = count($allfile);
+                $a = 0;
+                $c = 0;
+                    for ($i=0; $i<$totalimages; $i++) {
+                        $a++;
+                        ?>
+                        <div class="post-container">
+                          <!-- For Displaying Username and Profile -->
+                            <div class="post-header">
+                                <div class="post-user">
+                                    <div class="post-profile">
+                                        <img src="<?php if(isset($dp))echo $dp;?>" alt="">
+                                    </div>
+                                    <div class="post-username">
+                                      <label for="" class="person"><?php echo $myname;?></label>
+                                      <label for=""><?php echo $pic_id[$c]; ?></label>
+                                    </div>
+                                  </div>
+                                    <!-- For Post Options -->
+                                    <div class="post-options">
+                                        <button class="dropbtn"><i class="op ion-android-more-vertical"></i></button>
+                                        <div class="dropdown-content">
+                                            <form action="" method="POST">
+                                                <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_id">
+                                                <input type="hidden" value="<?php echo $allfile[$c]; //This Fetches Image id from Table?>" name="post_name">
+                                                <input type="submit" value="Delete" name="del">
+                                            </form>
+                                        </div>
+                                    </div>
+                              </div>
+                                <!-- Post Photo -->
+                                <div class="post-photo">
+                                  <form action="" method="POST">
+                                    <input type="image" src="<?php echo $direct.$allfile[$c]; //This Fetches the image name from table?>" value="<?php echo $direct.$allfile[$c];?>" name="delete_file">
+                                  </form>
+                                </div>
+                                <!-- Post Sharing And Like Options -->
+                                <div class="post-footer">
+                                   <div class="post-actions">
+                                       <div class="post-like">
+                                         <form action="" method="POST">
+                                           <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_like_id">
+                                           <button type="submit" name="like">
+                                             <i class="dill ion-android-favorite"></i>
+                                           </button>
+                                         </form>
+                                       </div>
+                                       <div class="post-comment">
+                                         <form action="" method="POST">
+                                           <button type="submit" name="comment">
+                                             <i class="ion-chatbox-working"></i>
+                                           </button>
+                                         </form>
+                                       </div>
+                                       <div class="post-share">
+                                         <form action="" method="POST">
+                                           <button type="submit" name="messg">
+                                             <i class="ion-paper-airplane"></i>
+                                           </button>
+                                         </form>
+                                       </div>
+                                   </div>
+                                   <div class="post-save">
+                                       <button class="sav_act">
+                                           <i class="ion-ios-download-outline"></i>
+                                       </button>
+                                       <div class="save-options">
+                                         <form class="" action="index.html" method="post">
+                                           <button type="submit" name="save"><i class="ion-android-bookmark"></i> Save</button>
+                                           <button type="submit" name="download"><i class="ion-ios-cloud-download"></i> Download</button>
+                                         </form>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                        <?php
+                        $c++;
+                    }
+                }
+            ?>
     </div>
 </body>
 </html>
