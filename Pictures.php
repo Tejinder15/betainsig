@@ -49,27 +49,41 @@ if(isset($_POST['del'])){
  }
 
  // For Liking POST
- if (isset($_POST['like'])) {
-   $poid = $_POST['post_like_id'];
-     $like_check = mysqli_query($con,"SELECT `User_id` from `likes` where `Id`='$poid'");
-     $like_check_result = mysqli_num_rows($like_check);
-     if($like_check_result == 1){
-        echo "Already Liked the Post";
-     }
-     else {
-       $pos_like = mysqli_query($con,"INSERT INTO likes(`Id`,`User_id`,`likes`) Values('$poid','$mid',1)");
-       $update_likes = mysqli_query($con,"UPDATE posts set `likes`=`likes`+1 where `id`='$poid'");
-       if($pos_like && $update_likes){
-         echo "You Liked the Post";
-       }
-       else{
-         echo "Could not Like the Photo";
-       }
-     }
+//  if (isset($_POST['like'])) {
+//    $poid = $_POST['post_like_id'];
+//      $like_check = mysqli_query($con,"SELECT `User_id` from `likes` where `Id`='$poid'");
+//      $like_check_result = mysqli_num_rows($like_check);
+//      if($like_check_result == 1){
+//         echo "Already Liked the Post";
+//      }
+//      else {
+//        $pos_like = mysqli_query($con,"INSERT INTO likes(`Id`,`User_id`,`likes`) Values('$poid','$mid',1)");
+//        $update_likes = mysqli_query($con,"UPDATE posts set `likes`=`likes`+1 where `id`='$poid'");
+//        if($pos_like && $update_likes){
+//          echo "You Liked the Post";
+//        }
+//        else{
+//          echo "Could not Like the Photo";
+//        }
+//      }
+// }
+//  else{
+//    echo "";
+//  }
+
+// For Checking the status of the Post
+if(isset($_POST['stat'])){
+  $pic = $_POST['post_id'];
+  $status_query = mysqli_query($con,"SELECT `likes` from posts where `id`='$pic'");
+  $status_result = mysqli_fetch_assoc($status_query);
+  $num_of_likes = $status_result['likes'];
+  echo"<script>
+  alert('You have $num_of_likes Likes on this post!');
+  </script>";
 }
- else{
-   echo "";
- }
+else{
+  echo "";
+}
 
 ?>
 
@@ -107,16 +121,16 @@ if(isset($_POST['del'])){
                                     </div>
                                     <div class="post-username">
                                       <label for="" class="person"><?php echo $myname;?></label>
-                                      <label for=""><?php echo $pic_id[$c]; ?></label>
                                     </div>
                                   </div>
                                     <!-- For Post Options -->
                                     <div class="post-options">
-                                        <button class="dropbtn"><i class="op ion-android-more-vertical"></i></button>
+                                        <div class="dropbtn"><i class="op ion-android-more-vertical"></i></div>
                                         <div class="dropdown-content">
                                             <form action="" method="POST">
                                                 <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_id">
                                                 <input type="hidden" value="<?php echo $allfile[$c]; //This Fetches Image id from Table?>" name="post_name">
+                                                <input type="submit" value="Status" name="stat">
                                                 <input type="submit" value="Delete" name="del">
                                             </form>
                                         </div>
@@ -173,5 +187,8 @@ if(isset($_POST['del'])){
                 }
             ?>
     </div>
+    <script type="text/javascript">
+
+    </script>
 </body>
 </html>
