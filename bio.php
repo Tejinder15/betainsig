@@ -97,8 +97,8 @@ if(isset($_POST['upload'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insignia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@200&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="vendors/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/profile.css">
 </head>
@@ -118,7 +118,6 @@ if(isset($_POST['upload'])){
     </nav>
 
     <section class="main">
-
         <!--For Profile Photo,Likes ,Followers,Following etc.-->
         <div class="bio-container">
             <div class="profile-container">

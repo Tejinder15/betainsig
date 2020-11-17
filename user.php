@@ -37,14 +37,16 @@ $direc_name = $user_name;
 $direct = "users_data"."/".$direc_name."/";
 
 // For Openinng directory
-$h = opendir($direct);
+// For Retrieving Images from mysql Table
+$post_dis = mysqli_query($con,"SELECT * from `posts` where `user_id`='$userid'");
+$pic_id = array();
 $allfile = array();
-while ($f=readdir($h)) {
+while ($f = mysqli_fetch_array($post_dis)) {
     if ($f!='..' && $f!='.') {
-        $allfile[] = $f;
+        $allfile[] = $f['post_name'];
+        $pic_id[] = $f['id'];
     }
 }
-    closedir($h);
 
     // For Follow and unfollow
     $isFollowing = False;
@@ -61,7 +63,7 @@ while ($f=readdir($h)) {
             }
         $isFollowing = True;
     }
-    
+
     if (isset($_POST['unfollow'])) {
         $check2_query = mysqli_query($con,"SELECT * from followers Where `user_id`='$userid' AND `follower_id`='$followerid'");
         $check2_result = mysqli_num_rows($check2_query);
@@ -69,7 +71,7 @@ while ($f=readdir($h)) {
                 $query4 = mysqli_query($con,"DELETE FROM followers WHERE `user_id`='$userid' AND `follower_id`='$followerid'");
                 echo 'Unfollowed the user';
             }
-            $isFollowing = False;        
+            $isFollowing = False;
     }
 
 ?>
@@ -80,93 +82,91 @@ while ($f=readdir($h)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insignia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat:wght@200&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="vendors/css/ionicons.min.css">
-    <link rel="stylesheet" href="assets/css/user.css">
+    <link rel="stylesheet" href="assets/css/profile.css">
 </head>
 <body>
     <nav>
         <div class="logo">
             <h1>Insignia</h1>
         </div>
-        
+
         <div class="navbar">
-            <a href=""><i class="ion-home"></i></a> 
-            <a href="search.php"><i class="ion-android-search"></i></a> 
-            <a href="favorite.php"><i class="ion-android-favorite"></i></a> 
+            <a href=""><i class="ion-home"></i></a>
+            <a href="search.php"><i class="ion-android-search"></i></a>
+            <a href="favorite.php"><i class="ion-android-favorite"></i></a>
             <a href="message.php"><i class="ion-ios-paperplane"></i></a>
             <a href="bio.php"><i class="ion-person"></i></a>
           </div>
     </nav>
 
     <section class="main">
-        <!--For Profile Photo,Likes ,Followers,Following etc.-->
-        <div class="bio-container">
-            <div class="profile-container">
-                <div class="profile-photo">
-                    <img src="<?php if(isset($dp)){
-                        echo $dp;
-                    }?>" alt=""  width="100%" height="140" style="border-radius:50%">
-                    
+      <!--For Profile Photo,Likes ,Followers,Following etc.-->
+      <div class="bio-container">
+          <div class="profile-container">
+            <div class="prof">
+              <div class="profile-photo">
+                  <img src="<?php if(isset($dp)){
+                      echo $dp;
+                  }?>" alt=""  width="100%" height="140" style="border-radius:50%">
                 </div>
-            </div>
-            <div class="bio-details">
-                <div class="dropdown" style="float: right;">
-                    <button class="dropbtn" onclick="myFunction()">
-                        <span class="setting"><i class="ion-android-settings"></i></span>
-                    </button><br>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="settings.php"><i class="ion-settings"></i> Settings</a>
-                        <a href="includes/form_handlers/logout.php"><i class="ion-log-out"></i> Logout</a>
-                    </div>
-                    <br>
-                </div>
-                
-                <div class="bio-name">
-                    <span><?php echo $user_name; ?></span>
-                </div>
-
-                <div class="strength">
-                    <span><?php echo $total_post;?>Post</span>
-                    <span><?php echo $num_of_followers;?>Followers</span>
-                    <span><?php echo $num_of_following;?>Following</span>
-                </div>
-                <form action="" method="post">
-                    <?php
-                        if ($isFollowing) {
-                            echo '<input type="submit" name="unfollow" value="Unfollow" class="followbtn">';
-                        }else{
-                            echo '<input type="submit" name="follow" value="Follow" class="followbtn">';
-                        }
-                    ?>
-                </form>
-            </div>
-        </div> 
-
-        <div class="posts-container">
-        <?php
-        if(isset($allfile))
-            {
-            $totalimages = count($allfile);
-            $col = 3;
-            $row = ceil($totalimages/3);
-            $c = 0;
-            for ($j=0; $j < $row; $j++) { 
-                echo "<tr>";
-                for ($i=0; $i <$col && $c<$totalimages; $i++) { 
-                    ?>
-                    <div class="post"><img src="<?php echo $direct. $allfile[$c];?>" width="100%" height="230"></div>
-                    <?php
-                    $c++;
-                }
-            }
-    
-        }
-          
-            ?>
+              </div>
         </div>
+          <div class="bio-details">
+              <div class="bio-name">
+                  <span><?php echo "$user_name";?></span>
+              </div>
+
+              <div class="strength">
+                <a href="userpic.php?id=<?php echo $myid;?>"><b><?php if($total_post){ echo $total_post;}?></b>Posts</a>
+                <a href="Followers.php?id=<?php echo $myid;?>"><b><?php echo $num_of_followers;?></b>Followers</a>
+                <a href="Following.php?id=<?php echo $myid;?>"><b><?php echo $num_of_following;?></b>Following</a>
+              </div>
+              <form action="" method="post">
+                  <?php
+                      if ($isFollowing) {
+                          echo '<input type="submit" name="unfollow" value="Unfollow" class="followbtn">';
+                      }else{
+                          echo '<input type="submit" name="follow" value="Follow" class="followbtn">';
+                      }
+                  ?>
+              </form>
+          </div>
+      </div>
+
+      <div class="posts-container">
+      <?php
+      if(isset($allfile))
+          {
+          $totalimages = count($allfile);
+          $col = 3;
+          $row = ceil($totalimages/3);
+          $c = 0;
+          for ($j=0; $j < $row; $j++) {
+              echo "<tr>";
+              for ($i=0; $i <$col && $c<$totalimages; $i++) {
+                  ?>
+                  <div class="post"><a href="userpic.php?id=<?php echo $followerid;?>"><img src="<?php echo $direct. $allfile[$c];?>" width="100%" height="230"></a></div>
+                  <?php
+                  $c++;
+              }
+          }
+
+      }
+
+          ?>
+      </div>
+      <footer>
+        <div class="nav2">
+          <a href="index.php?id=<?php echo $myid;?>"><i class="ion-home"></i></a>
+          <a href="search.php?id=<?php echo $myid;?>"><i class="ion-android-search"></i></a>
+          <a href="favorite.php?id=<?php echo $myid;?>"><i class="ion-android-favorite"></i></a>
+          <a href="message.php?id=<?php echo $myid;?>"><i class="ion-ios-paperplane"></i></a>
+          <a href="#" class="active"><i class="ion-person"></i></a>
+        </div>
+      </footer>
     </section>
     <script>
         function myFunction(){

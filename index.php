@@ -27,9 +27,9 @@ else{
 
         <div class="navbar">
             <a class="active" href="#"><i class="ion-home"></i></a>
-            <a href="search.php"><i class="ion-android-search"></i></a>
-            <a href="favorite.php"><i class="ion-android-favorite"></i></a>
-            <a href="message.php"><i class="ion-ios-paperplane"></i></a>
+            <a href="search.php?id=<?php echo $myid;?>"><i class="ion-android-search"></i></a>
+            <a href="favorite.php?id=<?php echo $myid;?>"><i class="ion-android-favorite"></i></a>
+            <a href="message.php?id=<?php echo $myid;?>"><i class="ion-ios-paperplane"></i></a>
             <a href="bio.php?id=<?php echo $myid;?>"><i class="ion-person"></i></a>
           </div>
     </nav>

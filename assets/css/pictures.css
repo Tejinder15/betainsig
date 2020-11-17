@@ -84,10 +84,12 @@ nav{
   background: transparent;
   border: none;
   outline: none;
-  height: 3rem;
-  width: 3rem;
+  height: 2.3rem;
+  width: 2.3rem;
   text-align: center;
   font-size: 2rem;
+  margin-right: 1rem;
+  padding-top: 0.3rem;
 }
 
 .op {
@@ -99,19 +101,16 @@ nav{
   position: absolute;
   background-color: #f9f9f9;
   min-width: 120px;
-  height: 35px;
   right: 0;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   border-radius: 3px;
-  font-family: "Roboto", sans-serif;
-  font-weight: bold;
 }
 
 .dropdown-content input[type="submit"]{
   font-size: 1.1rem;
   font-family: "Roboto", sans-serif;
-  background-color: transparent;
+  background-color: #f9f9f9;
   border: none;
   outline: none;
   display: block;
@@ -121,7 +120,7 @@ nav{
   padding: 0.5rem 0.5rem;
 }
 
-.dropbtn:focus + .dropdown-content {
+.post-options:hover .dropdown-content {
   display: block;
 }
 
@@ -129,6 +128,21 @@ nav{
   background-color: #dddddd;
   border-radius: 3px;
   font-size: 1rem;
+}
+
+/*---------FOLLOW_BUTTON-----------*/
+.bio-container .followbtn{
+  border: none;
+  border-radius: 4px;
+  padding: 0.2rem 0.3rem;
+  font-size: 1rem;
+  background-color: #ff007f;
+  color: white;
+  text-align: center;
+  margin: auto;
+  display: block;
+  margin-top: 1rem;
+  outline: none;
 }
 
 /*----------POST----------*/
