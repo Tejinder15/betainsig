@@ -38,7 +38,7 @@ while ($f = mysqli_fetch_array($post_dis)) {
 // For Liking the Post of the User
 if (isset($_POST['like'])) {
   $poid = $_POST['post_like_id'];
-    $like_check = mysqli_query($con,"SELECT * from `likes` where `Id`='$poid' AND `User_id`='$myid'");
+    $like_check = mysqli_query($con,"SELECT * from `likes` where `Id`='$poid' AND `user_id`='$myid'");
     $like_check_result = mysqli_num_rows($like_check);
     // $like_check_result = mysqli_fetch_assoc($like_check);
     if($like_check_result >=1){
@@ -48,7 +48,7 @@ if (isset($_POST['like'])) {
        </script>";
     }
     else {
-      $pos_like = mysqli_query($con,"INSERT INTO likes(`Id`,`User_id`,`likes`) Values('$poid','$myid',1)");
+      $pos_like = mysqli_query($con,"INSERT INTO likes(`Id`,`user_id`,`Post_of`,`likes`) Values('$poid','$myid','$userid',1)");
       $update_likes = mysqli_query($con,"UPDATE posts set `likes`=`likes`+1 where `id`='$poid'");
       if($pos_like && $update_likes){
         echo "<script>

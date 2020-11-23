@@ -59,6 +59,7 @@ if(isset($_POST['upload'])){
     $file_size = $_FILES['image']['size'];
     $file_tmp = $_FILES['image']['tmp_name'];
     $file_type = $_FILES['image']['type'];
+    $pic_cap = $_POST['caption'];
     $targetfile = $direct.basename($_FILES['image']['name']);
     $post_type = strtolower(pathinfo($targetfile,PATHINFO_EXTENSION));
 
@@ -71,7 +72,7 @@ if(isset($_POST['upload'])){
         $found_result = mysqli_fetch_assoc($check_post_query);
         if ($found_result!=$file_name) {
             move_uploaded_file($file_tmp,$direct.$file_name);
-            $post_query = mysqli_query($con,"INSERT INTO posts(`id`,`posted_by`,`posted_on`,`post_name`,`post_path`,`user_id`,`likes`) VALUES('','$myname','$dt','$file_name','$direct','$myid','')");
+            $post_query = mysqli_query($con,"INSERT INTO posts(`id`,`posted_by`,`posted_on`,`post_name`,`post_path`,`post_caption`,`user_id`,`likes`) VALUES('','$myname','$dt','$file_name','$direct','$pic_cap','$myid','')");
             $total_post++;
             $my_post = mysqli_query($con,"UPDATE `users` SET `num_posts`='$total_post' where `Id`='$myid'");
             array_push($error,"Successfully Posted!.<br>");
@@ -176,19 +177,16 @@ if(isset($_POST['upload'])){
 
                 <div class="modal">
                     <div class="modal-content">
-                      <div class="left">
                         <form action="" method="POST" enctype="multipart/form-data">
                           <input type="file" name="image">
-                      </div>
-                      <div class="right">
                         <b><span class="close-button">&times;</span></b>
                         <div class="caption-section">
                           <b><label for="">Caption</label></b>
                           <input type="text" name="caption" id="cap" autocomplete="off" placeholder="Enter Caption">
                         </div>
-                        <input type="submit" name="upload" value="Post" class="postup">
+                        <br>
+                        <center><input type="submit" name="upload" value="Post" class="postup"></center>
                       </form>
-                      </div>
                     </div>
                 </div>
             </div>
