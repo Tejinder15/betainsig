@@ -39,6 +39,8 @@ nav{
 .post-container {
   width: 100%;
   height: auto;
+  margin-bottom: 2rem;
+  font-family: "Roboto", sans-serif;
 }
 
 .post-header {
@@ -47,7 +49,6 @@ nav{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: "Roboto", sans-serif;
   font-size: 1.3rem;
 }
 
@@ -107,7 +108,7 @@ nav{
   border-radius: 3px;
 }
 
-.dropdown-content input[type="submit"]{
+.dropdown-content button{
   font-size: 1.1rem;
   font-family: "Roboto", sans-serif;
   background-color: #f9f9f9;
@@ -124,7 +125,7 @@ nav{
   display: block;
 }
 
-.dropdown-content input[type="submit"]:hover {
+.dropdown-content button:hover {
   background-color: #dddddd;
   border-radius: 3px;
   font-size: 1rem;
@@ -146,7 +147,7 @@ nav{
 }
 
 /*----------POST----------*/
-.post-photo input[type="image"]{
+.post-photo img{
   width: 100%;
   height: 35vw;
 }
@@ -161,7 +162,6 @@ nav{
   padding: 1rem;
   font-size: 2rem;
   margin-top: -4px;
-  margin-bottom: 2.5rem;
 }
 
 .post-actions {
@@ -232,67 +232,42 @@ nav{
   font-size: 2.2rem;
   color: #00ACEE;
 }
-
-/*--------Save--------*/
-.post-save {
-  cursor: pointer;
+/*------------Save------------*/
+.post-save{
   position: relative;
   display: inline-block;
   font-size: 2rem;
 }
 
 .sav_act {
-  width: 2.3rem;
-  height: 2.3rem;
-  background-color: transparent;
+  background: transparent;
   border: none;
   outline: none;
+  height: 2.3rem;
+  width: 2.3rem;
+  text-align: center;
   font-size: 2rem;
-  user-select: none;
-}
-
-.sav_act:hover{
-  color: #20bf6b;
-  font-size: 2.2rem;
-}
-
-.sav_act:focus + .save-options {
-  display: block;
-  pointer-events: all;
+  margin-right: 1rem;
+  padding-top: 0.3rem;
+  margin: 0.5rem;
 }
 
 .save-options {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 130px;
-  height: auto;
+  min-width: 120px;
   right: 0;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  border-radius: 8px;
-}
-
-.save-options:first-child{
-  padding: 0.2rem 0.8rem;
-  word-spacing: 12px;
-  border-radius: 8px 8px 0px 0px;
-  font-size: 1.1rem;
-  font-family: "Roboto", sans-serif;
-  border: none;
-  outline: none;
-  display: block;
-  text-align: left;
-  width: 100%;
-  background-color: orange;
+  border-radius: 3px;
 }
 
 .save-options button{
   font-size: 1.1rem;
   font-family: "Roboto", sans-serif;
-  background-color: transparent;
+  background-color: #f9f9f9;
   border: none;
-  border-radius: 0px 0px 8px 8px;
   outline: none;
   display: block;
   text-align: center;
@@ -302,13 +277,21 @@ nav{
 }
 
 .save-options button:hover {
-    background-color: #dddddd;
-    font-size: 1rem;
+  background-color: #dddddd;
+  border-radius: 3px;
+  font-size: 1rem;
 }
 
-.save-options button:hover {
-    background-color: #dddddd;
-    font-size: 1rem;
+.show{
+  display: block;
+}
+/*------------Caption------------*/
+.post-caption{
+  padding: 0.3rem 0rem 0.3rem 1rem;
+  font-size: 1.3rem;
+}
+.caption{
+  font-size: 1.1rem;
 }
 /*---------Responsive---------*/
 @media screen and (max-width: 375px) {
@@ -322,5 +305,10 @@ nav{
 
   .post-photo .post {
     height: 50vh;
+  }
+
+  .post-photo img{
+    width: 100%;
+    height: 13rem;
   }
 }

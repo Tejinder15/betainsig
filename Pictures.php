@@ -27,10 +27,12 @@ $direct = "users_data"."/".$myname."/";
 $post_dis = mysqli_query($con,"SELECT * from `posts` where `user_id` = '$mid'");
 $pic_id = array();
 $allfile = array();
+$pic_cap = array();
 while ($f = mysqli_fetch_array($post_dis)) {
     if ($f!='..' && $f!='.') {
         $allfile[] = $f['post_name'];
         $pic_id[] = $f['id'];
+        $pic_cap[] = $f['post_caption'];
     }
 }
 
@@ -72,18 +74,18 @@ if(isset($_POST['del'])){
 //  }
 
 // For Checking the status of the Post
-if(isset($_POST['stat'])){
-  $pic = $_POST['post_id'];
-  $status_query = mysqli_query($con,"SELECT `likes` from posts where `id`='$pic'");
-  $status_result = mysqli_fetch_assoc($status_query);
-  $num_of_likes = $status_result['likes'];
-  echo"<script>
-  alert('You have $num_of_likes Likes on this post!');
-  </script>";
-}
-else{
-  echo "";
-}
+// if(isset($_POST['stat'])){
+//   $pic = $_POST['post_id'];
+//   $status_query = mysqli_query($con,"SELECT `likes` from posts where `id`='$pic'");
+//   $status_result = mysqli_fetch_assoc($status_query);
+//   $num_of_likes = $status_result['likes'];
+//   echo"<script>
+//   alert('You have $num_of_likes Likes on this post!');
+//   </script>";
+// }
+// else{
+//   echo "";
+// }
 
 ?>
 
@@ -130,8 +132,10 @@ else{
                                             <form action="" method="POST">
                                                 <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_id">
                                                 <input type="hidden" value="<?php echo $allfile[$c]; //This Fetches Image id from Table?>" name="post_name">
-                                                <input type="submit" value="Status" name="stat">
-                                                <input type="submit" value="Delete" name="del">
+                                                <!-- <input type="submit" value="Status" name="stat"> -->
+                                                <!-- <input type="submit" value="Delete" name="del"> -->
+                                                <button type="button" name="button" class="stbtn" data-st="<?php echo $pic_id[$c]; ?>"><i class="ion-stats-bars"></i> Status</button>
+                                                <button type="submit" name="del" data-id="<?php echo $pic_id[$c];?>" name="del"><i class="ion-trash-b"></i> Delete</button>
                                             </form>
                                         </div>
                                     </div>
@@ -139,7 +143,7 @@ else{
                                 <!-- Post Photo -->
                                 <div class="post-photo">
                                   <form action="" method="POST">
-                                    <input type="image" src="<?php echo $direct.$allfile[$c]; //This Fetches the image name from table?>" value="<?php echo $direct.$allfile[$c];?>" name="delete_file">
+                                    <img src="<?php echo $direct.$allfile[$c]; //This Fetches the image name from table?>" value="<?php echo $direct.$allfile[$c];?>" name="delete_file">
                                   </form>
                                 </div>
                                 <!-- Post Sharing And Like Options -->
@@ -148,37 +152,30 @@ else{
                                        <div class="post-like">
                                          <form action="" method="POST">
                                            <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_like_id">
-                                           <button type="submit" name="like">
+                                           <button name="like" class="like">
                                              <i class="dill ion-android-favorite"></i>
                                            </button>
                                          </form>
                                        </div>
                                        <div class="post-comment">
                                          <form action="" method="POST">
-                                           <button type="submit" name="comment">
+                                           <button  name="comment" class="comment">
                                              <i class="ion-chatbox-working"></i>
                                            </button>
                                          </form>
                                        </div>
                                        <div class="post-share">
                                          <form action="" method="POST">
-                                           <button type="submit" name="messg">
+                                           <button name="messg" class="messag">
                                              <i class="ion-paper-airplane"></i>
                                            </button>
                                          </form>
                                        </div>
                                    </div>
-                                   <div class="post-save">
-                                       <button class="sav_act">
-                                           <i class="ion-ios-download-outline"></i>
-                                       </button>
-                                       <div class="save-options">
-                                         <form class="" action="index.html" method="post">
-                                           <button type="submit" name="save"><i class="ion-android-bookmark"></i> Save</button>
-                                           <button type="submit" name="download"><i class="ion-ios-cloud-download"></i> Download</button>
-                                         </form>
-                                       </div>
-                                   </div>
+                               </div>
+                               <div class="post-caption">
+                                 <b><span class="caption"><?php echo $myname; ?></span></b>
+                                 <span><?php echo $pic_cap[$c];?></span>
                                </div>
                            </div>
                         <?php
@@ -187,8 +184,13 @@ else{
                 }
             ?>
     </div>
-    <script type="text/javascript">
-
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script src="assets/js/Pictures.js">
+    // $(document).ready(function(){
+    //   $(document).on("click",".delbtn", function(){
+    //     alert("Hello World");
+    //   });
+    // });
     </script>
 </body>
 </html>
