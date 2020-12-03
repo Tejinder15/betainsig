@@ -4,7 +4,7 @@ require "config/config.php";
 
 $followerid = $_GET['id']; // For the Follower id
 
-$userid = $_SESSION['uid'];
+$userid = $_SESSION['fid'];
 
 // For Fetching Username from database
 $user_query = mysqli_query($con,"SELECT `Username` from users where `Id`='$userid'");
@@ -65,10 +65,10 @@ while ($f = mysqli_fetch_array($post_dis)) {
     }
 
     if (isset($_POST['unfollow'])) {
-        $check2_query = mysqli_query($con,"SELECT * from followers Where `user_id`='$userid' AND `follower_id`='$followerid'");
+        $check2_query = mysqli_query($con,"SELECT * from followers Where `user_id`='$followerid' AND `follower_id`='$userid'");
         $check2_result = mysqli_num_rows($check2_query);
             if ($check2_result> 0) {
-                $query4 = mysqli_query($con,"DELETE FROM followers WHERE `user_id`='$userid' AND `follower_id`='$followerid'");
+                $query4 = mysqli_query($con,"DELETE FROM followers WHERE `user_id`='$userid' AND `follower_id`='$userid'");
                 echo 'Unfollowed the user';
             }
             $isFollowing = False;

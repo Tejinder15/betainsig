@@ -2,18 +2,19 @@
 
 require "config/config.php";
 $myid = $_GET['id'];
-
+unset($_SESSION['fid']);
 // For fetching the Followers from the table
-$following_query = mysqli_query($con,"SELECT followers.`user_id`,users.* from `followers` JOIN `users` ON followers.`user_id`= users.`Id` where `follower_id` = '$myid'");
+$following_query = mysqli_query($con,"SELECT followers.*,users.* from `followers` JOIN `users` ON followers.`user_id`= users.`Id` where `follower_id` = '$myid'");
 $following_profile = array();
 $following_names = array();
+$follow_id = array();
 while ($f = mysqli_fetch_array($following_query)) {
-        $following_id[] = $f['user_id'];
         $following_names[] = $f['Username'];
         $following_profile[] = $f['profile_pic'];
+        $follow_id[] = $f['id'];
 }
+// print_r($follow_id);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,9 +22,8 @@ while ($f = mysqli_fetch_array($following_query)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insignia</title>
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/follow.css">
 </head>
 <body>
@@ -39,7 +39,7 @@ while ($f = mysqli_fetch_array($following_query)) {
         if (isset($following_names)) {
             $total = count($following_names);
             $c = -1;
-            for ($i=0; $i<$total; $i++) { 
+            for ($i=0; $i<$total; $i++) {
                 $c++;
                 ?>
                 <div class="following-details">
@@ -49,11 +49,11 @@ while ($f = mysqli_fetch_array($following_query)) {
                         </div>
                     </div>
                     <div class="username">
-                        <h2><?php echo $following_names[$c];?></h2>
+                        <b><span><?php echo $following_names[$c];?></span></b>
                     </div>
                     <div class="option">
                         <form action="" method="post">
-                            <input type="submit" value="Unfollow" name="unfollow" class="unfo">
+                            <input type="submit" value="Unfollow" name="unfollow" class="unfo" data-id="<?php echo $follow_id[$c];?>">
                         </form>
                     </div>
                 </div>
@@ -62,5 +62,9 @@ while ($f = mysqli_fetch_array($following_query)) {
         }
         ?>
     </section>
+    <script type="text/javascript" src="assets/js/jquery.js">
+    </script>
+    <script type="text/javascript" src="assets/js/unfollow.js">
+    </script>
 </body>
 </html>

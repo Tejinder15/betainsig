@@ -13,7 +13,7 @@ if (isset($_POST['search'])) {
 
    $Name = $_POST['search'];
    $followsid = $_POST['followid'];
-   
+
 //Search query.
 
    $Query = "SELECT `Username`,`Id` FROM users WHERE `Username` LIKE '$Name%' LIMIT 5";
@@ -48,9 +48,9 @@ if (isset($_POST['search'])) {
 
    <!-- Assigning searched result in "Search box" in "search.php" file. -->
 
-       <?php 
-       echo $Result['Username']; 
-       $_SESSION['uid'] = $Result['Id'];
+       <?php
+       echo $Result['Username'];
+       $_SESSION['fid'] = $Result['Id'];
        ?>
 
    </li></a>

@@ -3,7 +3,7 @@
 require "config/config.php";
 
 $myid = $_GET['id'];
-$userid = $_SESSION['uid'];
+$userid = $_SESSION['fid'];
 
 $error = array(); // For Holding error messages
 
@@ -28,43 +28,16 @@ $direct = "users_data"."/".$myname."/";
 $post_dis = mysqli_query($con,"SELECT * from `posts` where `user_id` = '$userid'");
 $pic_id = array();
 $allfile = array();
+$pic_cap = array();
 while ($f = mysqli_fetch_array($post_dis)) {
     if ($f!='..' && $f!='.') {
         $allfile[] = $f['post_name'];
         $pic_id[] = $f['id'];
+        $pic_cap[] = $f['post_caption'];
     }
 }
 
 // For Liking the Post of the User
-if (isset($_POST['like'])) {
-  $poid = $_POST['post_like_id'];
-    $like_check = mysqli_query($con,"SELECT * from `likes` where `Id`='$poid' AND `user_id`='$myid'");
-    $like_check_result = mysqli_num_rows($like_check);
-    // $like_check_result = mysqli_fetch_assoc($like_check);
-    if($like_check_result >=1){
-       // echo "Already Liked the Post";
-       echo "<script>
-       alert('Already Liked the Post');
-       </script>";
-    }
-    else {
-      $pos_like = mysqli_query($con,"INSERT INTO likes(`Id`,`user_id`,`Post_of`,`likes`) Values('$poid','$myid','$userid',1)");
-      $update_likes = mysqli_query($con,"UPDATE posts set `likes`=`likes`+1 where `id`='$poid'");
-      if($pos_like && $update_likes){
-        echo "<script>
-        alert('You Liked the Post');
-        </script>";
-      }
-      else{
-        echo "<script>
-        alert('Could not Like the Photo')
-        </script>";
-      }
-    }
-}
-else{
-  echo "";
-}
 
  ?>
 <!DOCTYPE html>
@@ -83,6 +56,8 @@ else{
             <h1>Posts</h1>
         </div>
     </nav>
+    <input type="hidden" id="likers-id" value="<?php echo $myid;?>">
+    <input type="hidden" id="user-id" value="<?php echo $userid;?>">
     <div class="main">
                 <?php
             if(isset($allfile)){
@@ -119,7 +94,7 @@ else{
                                        <div class="post-like">
                                          <form action="" method="POST">
                                            <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_like_id">
-                                           <button type="submit" name="like">
+                                           <button type="button" class="like"  name="like" data-id="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>">
                                              <i class="dill ion-android-favorite"></i>
                                            </button>
                                          </form>
@@ -151,6 +126,10 @@ else{
                                        </div>
                                    </div>
                                </div>
+                               <div class="post-caption">
+                                 <b><span class="caption"><?php echo $myname; ?></span></b>
+                                 <span><?php echo $pic_cap[$c];?></span>
+                               </div>
                            </div>
                         <?php
                         $c++;
@@ -158,5 +137,9 @@ else{
                 }
             ?>
     </div>
+    <script type="text/javascript" src="assets/js/jquery.js">
+    </script>
+    <script type="text/javascript" src="assets/js/userpic.js">
+    </script>
 </body>
 </html>

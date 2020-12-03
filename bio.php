@@ -27,19 +27,18 @@ $num_of_following = mysqli_num_rows($Following_query);
 $Follower_query = mysqli_query($con,"SELECT * from followers where `user_id`='$myid'");
 $num_of_followers = mysqli_num_rows($Follower_query);
 
-
 //For the Directory of the user
 $direc_name = $myname;
 $direct = "users_data"."/".$direc_name."/";
-
-// For Fetching Profile Photo of the User
-$prof_direct = "profiles"."/".$myname."."."*"; // Profile Directory;
-$openimages = glob($prof_direct);
-
+// For Fetching Profile Photo of the
 $dp = array();
-foreach($openimages as $image) {
-    $dp = $image;
+$profile_query = mysqli_query($con,"SELECT * from `users` where `Id`='$myid'");
+while($row = mysqli_fetch_assoc($profile_query)){
+  if ($row!='..' && $row!='.') {
+      $dp[] = $row['profile_pic'];
+  }
 }
+$profile_dp = implode("",$dp);
 
 // For Retrieving Images from mysql Table
 $post_dis = mysqli_query($con,"SELECT * from `posts` where `user_id`='$myid'");
@@ -72,7 +71,7 @@ if(isset($_POST['upload'])){
         $found_result = mysqli_fetch_assoc($check_post_query);
         if ($found_result!=$file_name) {
             move_uploaded_file($file_tmp,$direct.$file_name);
-            $post_query = mysqli_query($con,"INSERT INTO posts(`id`,`posted_by`,`posted_on`,`post_name`,`post_path`,`post_caption`,`user_id`,`likes`) VALUES('','$myname','$dt','$file_name','$direct','$pic_cap','$myid','')");
+            $post_query = mysqli_query($con,"INSERT INTO posts(`id`,`posted_by`,`profile`,`posted_on`,`post_name`,`post_path`,`post_caption`,`user_id`,`likes`) VALUES('','$myname','$profile_dp','$dt','$file_name','$direct','$pic_cap','$myid','')");
             $total_post++;
             $my_post = mysqli_query($con,"UPDATE `users` SET `num_posts`='$total_post' where `Id`='$myid'");
             array_push($error,"Successfully Posted!.<br>");
@@ -124,9 +123,9 @@ if(isset($_POST['upload'])){
             <div class="profile-container">
               <div class="prof">
                 <div class="profile-photo">
-                    <img src="<?php if(isset($dp)){
-                        echo $dp;
-                    }?>" alt=""  width="100%" height="140" style="border-radius:50%">
+                    <img src="<?php
+                        echo $profile_dp;
+                    ?>" alt=""  width="100%" height="140" style="border-radius:50%">
                     <div class="pp">
                       <button class="prof_btn" onclick="document.location.href='settings.php?id=<?php echo $myid;?>';">
                         <i class="ion-camera"></i>

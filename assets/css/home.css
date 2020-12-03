@@ -92,7 +92,7 @@ ul {
     background-color: #ecf0f1;
     border-radius: 0px 0px 4px 4px;
 }
-  
+
 li a {
     font-family: 'Roboto', sans-serif;
     display: block;
@@ -100,66 +100,310 @@ li a {
     padding: 8px 16px;
     text-decoration: none;
 }
-  
+
 li a:hover:not(.active) {
     background-color: #00a8ff;
     color: white;
 }
 
-
-/*------HOME Page-----*/
-.com-post{
-    margin-bottom: 35px;
+/*--------HEADER---------*/
+.post-container {
+  width: 100%;
+  height: auto;
+  margin-bottom: 2rem;
+  font-family: "Roboto", sans-serif;
 }
 
-.post{
-      background-color: darkorchid;
-      width: 100%;
-      height: 500px;
+.post-header {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.3rem;
 }
 
-.post-options{
-    background-color: #ecf0f1;
+.post-user {
+  width: 50%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+.post-profile {
+  width: 50px;
+  height: 50px;
+  margin: 1rem;
+  position: relative;
+}
+
+.post-profile img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+/*-----------DELETE-OPTIONS-------------*/
+.post-options {
+  position: relative;
+  display: inline-block;
+  font-size: 2rem;
+}
+
+.dropbtn {
+  background: transparent;
+  border: none;
+  outline: none;
+  height: 2.3rem;
+  width: 2.3rem;
+  text-align: center;
+  font-size: 2rem;
+  margin-right: 1rem;
+  padding-top: 0.3rem;
+}
+
+.op {
+  pointer-events: none;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  right: 0;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 3px;
+}
+
+.dropdown-content button{
+  font-size: 1.1rem;
+  font-family: "Roboto", sans-serif;
+  background-color: #f9f9f9;
+  border: none;
+  outline: none;
+  display: block;
+  text-align: center;
+  word-spacing: 10px;
+  width: 100%;
+  padding: 0.5rem 0.5rem;
+}
+
+.post-options:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content button:hover {
+  background-color: #dddddd;
+  border-radius: 3px;
+  font-size: 1rem;
+}
+
+/*---------FOLLOW_BUTTON-----------*/
+.bio-container .followbtn{
+  border: none;
+  border-radius: 4px;
+  padding: 0.2rem 0.3rem;
+  font-size: 1rem;
+  background-color: #ff007f;
+  color: white;
+  text-align: center;
+  margin: auto;
+  display: block;
+  margin-top: 1rem;
+  outline: none;
+}
+
+/*----------POST----------*/
+.post-photo img{
+  width: 100%;
+  height: 35vw;
+}
+
+/*--------Post-Footer-------*/
+.post-footer {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  font-size: 2rem;
+  margin-top: -4px;
+}
+
+.post-actions {
+  width: 70%;
+  display: flex;
+  align-items: center;
+}
+
+.post-like {
+  margin: 0.5rem;
+  position: relative;
+}
+
+.post-like button {
+  width: 2.3rem;
+  height: 2.3rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.dill {
+  font-size: 2rem;
+  user-select: none;
+}
+
+.dill:hover {
+  font-size: 2.2rem;
+  color: #f50057;
+}
+/*------Comments--------*/
+
+.post-comment {
+  margin: 0.5rem;
+}
+
+.post-comment button {
+  width: 2.3rem;
+  height: 2.3rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 2rem;
+  user-select: none;
+}
+
+.post-comment button:hover{
+  font-size: 2.2rem;
+  color: #fd9644;
+}
+
+/*--------Share--------*/
+.post-share {
+  margin: 0.5rem;
+}
+
+.post-share button {
+  width: 2.3rem;
+  height: 2.3rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 2rem;
+  user-select: none;
+}
+
+.post-share button:hover{
+  font-size: 2.2rem;
+  color: #00ACEE;
+}
+/*------------Save------------*/
+.post-save {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  font-size: 2rem;
+}
+
+.sav_act {
+  width: 2.3rem;
+  height: 2.3rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 2rem;
+  user-select: none;
+}
+
+.sav_act:hover{
+  color: #20bf6b;
+  font-size: 2.2rem;
+}
+
+.sav_act:focus + .save-options {
+  display: block;
+  pointer-events: all;
+}
+
+.save-options {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 130px;
+  height: auto;
+  right: 0;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 8px;
+}
+
+.save-options:first-child{
+  padding: 0.2rem 0.8rem;
+  word-spacing: 12px;
+  border-radius: 8px 8px 0px 0px;
+  font-size: 1.1rem;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  outline: none;
+  display: block;
+  text-align: left;
+  width: 100%;
+  background-color: orange;
+}
+
+.save-options button{
+  font-size: 1.1rem;
+  font-family: "Roboto", sans-serif;
+  background-color: transparent;
+  border: none;
+  border-radius: 0px 0px 8px 8px;
+  outline: none;
+  display: block;
+  text-align: center;
+  word-spacing: 10px;
+  width: 100%;
+  padding: 0.5rem 0.5rem;
+}
+
+.save-options button:hover {
+    background-color: #dddddd;
+    font-size: 1rem;
+}
+
+.save-options button:hover {
+    background-color: #dddddd;
+    font-size: 1rem;
+}
+/*------------Caption------------*/
+.post-caption{
+  padding: 0.3rem 0rem 0.3rem 1rem;
+  font-size: 1.3rem;
+}
+.caption{
+  font-size: 1.1rem;
+}
+/*---------Responsive---------*/
+@media screen and (max-width: 375px) {
+  .logo {
+    margin-left: 10%;
+  }
+
+  .main {
     width: 100%;
-    height: 50px;
-}
+  }
 
-.pic{
-    height: 45px;
-    width: 45px;
-    border: 1px solid black;
-    border-radius: 50%;
-    background-color: #ff007f;
-    float: left;
-    margin-left: 15px;
-    margin-top: 4px;
-}
+  .post-photo .post {
+    height: 50vh;
+  }
 
-
-.person{
-    margin-top: 10px;
-    margin-left: 15px;
-    float: left;
-    font-size: 26px;
-    font-family: 'Noto Sans JP', sans-serif;
-}
-
-.post-options i{
-    font-size: 42px;
-    float: right;
-    margin-right: 10px;
-    margin-top: 5px;
-    text-decoration: none;
-    color: black;
-}
-.post-detail{
-      background-color: #ecf0f1;
-}
-
-.post-detail a i{
-    font-size: 35px;
-    text-decoration: none;
-    color: black;
-    margin-left: 10px;
-    margin-right: 10px;
+  .post-photo img{
+    width: 100%;
+    height: 13rem;
+  }
 }
