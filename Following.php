@@ -2,7 +2,7 @@
 
 require "config/config.php";
 $myid = $_GET['id'];
-unset($_SESSION['fid']);
+// unset($_SESSION['fid']);
 // For fetching the Followers from the table
 $following_query = mysqli_query($con,"SELECT followers.*,users.* from `followers` JOIN `users` ON followers.`user_id`= users.`Id` where `follower_id` = '$myid'");
 $following_profile = array();

@@ -24,13 +24,22 @@ $num_of_followers = mysqli_num_rows($Follower_query);
 $Following_query = mysqli_query($con,"SELECT * from followers where `user_id`='$userid'");
 $num_of_following = mysqli_num_rows($Following_query);
 
-$prof_direct = "profiles"."/".$user_name."."."*"; // Profile Directory;
-$openimages = glob($prof_direct);
+// $prof_direct = "profiles"."/".$user_name."."."*"; // Profile Directory;
+// $openimages = glob($prof_direct);
+//
+// $dp = array();
+// foreach($openimages as $image) {
+//     $dp = $image;
+// }
 
 $dp = array();
-foreach($openimages as $image) {
-    $dp = $image;
+$profile_query = mysqli_query($con,"SELECT * from `users` where `Id`='$userid'");
+while($row = mysqli_fetch_assoc($profile_query)){
+  if ($row!='..' && $row!='.') {
+      $dp[] = $row['profile_pic'];
+  }
 }
+$profile_dp = implode("",$dp);
 
 //For the Directory of the user
 $direc_name = $user_name;
@@ -49,19 +58,26 @@ while ($f = mysqli_fetch_array($post_dis)) {
 }
 
     // For Follow and unfollow
-    $isFollowing = False;
+    $isFollowing = "";
     $msg = array();
     if (isset($_POST['follow'])) {
         $check_query = mysqli_query($con,"SELECT * from followers Where `user_id`='$userid' AND `follower_id`='$followerid'");
         $check_result = mysqli_num_rows($check_query);
             if ($check_result ==0) {
-                $query2 = mysqli_query($con,"INSERT INTO followers(`user_id`,`follower_id`,`status`) VALUES('$userid','$followerid',1)");
-                echo 'Started Following';
+                $query2 = mysqli_query($con,"INSERT INTO followers(`user_id`,`follower_id`,`followers_id2`,`status`) VALUES('$userid','$followerid','$followerid',1)");
+                if($query2){
+                  echo 'Started Following';
+                  $isFollowing = True;
+                }
+                else{
+                  echo "Sorry Could Not Follow";
+                  // echo mysqli_errno($query2);
+                  // echo mysqli_error();
+                }
             }
             else{
                 array_push($msg,"Already Following!.<br>");
             }
-        $isFollowing = True;
     }
 
     if (isset($_POST['unfollow'])) {
@@ -108,9 +124,8 @@ while ($f = mysqli_fetch_array($post_dis)) {
           <div class="profile-container">
             <div class="prof">
               <div class="profile-photo">
-                  <img src="<?php if(isset($dp)){
-                      echo $dp;
-                  }?>" alt=""  width="100%" height="140" style="border-radius:50%">
+                  <img src="<?php echo $profile_dp;
+                  ?>" alt=""  width="100%" height="140" style="border-radius:50%">
                 </div>
               </div>
         </div>

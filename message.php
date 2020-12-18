@@ -1,3 +1,7 @@
+<?php
+require "config/config.php";
+$myid = $_GET['id'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,11 +22,11 @@
         </div>
         
         <div class="navbar">
-            <a href="mno.php"><i class="ion-home"></i></a> 
-            <a href="search.php"><i class="ion-android-search"></i></a> 
-            <a href="favorite.php"><i class="ion-android-favorite"></i></a> 
+            <a href="mno.php?id=<?php echo $myid;?>"><i class="ion-home"></i></a> 
+            <a href="search.php?id=<?php echo $myid;?>"><i class="ion-android-search"></i></a> 
+            <a href="favorite.php?id=<?php echo $myid;?>"><i class="ion-android-favorite"></i></a> 
             <a href="#" class="active"><i class="ion-ios-paperplane"></i></a>
-            <a href="bio.php"><i class="ion-person"></i></a>
+            <a href="bio.php?id=<?php echo $myid;?>"><i class="ion-person"></i></a>
           </div>
 
     </nav>
