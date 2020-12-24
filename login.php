@@ -12,12 +12,18 @@ if (isset($_POST['sub'])) {
         $check_login_query = mysqli_num_rows($check_database_query);
         $row = mysqli_fetch_assoc($check_database_query);
         if($check_login_query>0) {
-            $_SESSION['uid'] = $row['Id'];
-            $direc_name = $row["Username"];
-            $direct = "users_data"."/".$direc_name."/";
-            mkdir("$direct");
-            header("Location:index.php");
-            exit();
+            if($row['status']==1){
+                $_SESSION['aid'] = $row['Id'];
+                header("Location:dashboard.php");
+            }
+            else{
+                $_SESSION['uid'] = $row['Id'];
+                $direc_name = $row["Username"];
+                $direct = "users_data"."/".$direc_name."/";
+                mkdir("$direct");
+                header("Location:index.php");
+                exit();
+            }
         }
         else {
             array_push($msg,"Invalid Email or Password!");

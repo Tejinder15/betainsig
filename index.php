@@ -12,12 +12,14 @@ $following_post = mysqli_query($con,"SELECT followers.*,posts.* from `followers`
 $following_names = array();
 $allfile = array();
 $following_post_path = array();
-$following_id = array();
+$pic_id = array();
 $post_time = array();
 $complete_path = array();
 $profile = array();
+$person_id = array();
 while ($f = mysqli_fetch_array($following_post)) {
-        $following_id[] = $f['id'];
+        $person_id[] = $f['user_id'];
+        $pic_id[] = $f['id'];
         $following_names[] = $f['posted_by'];
         $following_post_path[] = $f['post_path'];
         $allfile[] = $f['post_name'];
@@ -51,6 +53,7 @@ while ($f = mysqli_fetch_array($following_post)) {
           </div>
     </nav>
 
+    <input type="hidden" id="likers-id" value="<?php echo $myid;?>">
     <section class="main">
       <?php
   if(isset($allfile)){
@@ -72,6 +75,19 @@ while ($f = mysqli_fetch_array($following_post)) {
                           </div>
                         </div>
                           <!-- For Post Options -->
+                          <div class="post-options">
+                                        <div class="dropbtn"><i class="op ion-android-more-vertical"></i></div>
+                                        <div class="dropdown-content">
+                                            <!-- <form action="" method="POST"> -->
+                                                <input type="hidden" class="us-id" value="<?php echo $person_id[$c];?>">
+                                                <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_id">
+                                                <input type="hidden" value="<?php echo $allfile[$c]; //This Fetches Image id from Table?>" name="post_name">
+                                                <!-- <input type="submit" value="Status" name="stat"> -->
+                                                <!-- <input type="submit" value="Delete" name="del"> -->
+                                                <button type="button" name="button" class="repo" data-st="<?php echo $pic_id[$c]; ?>">Report</button>
+                                            <!-- </form> -->
+                                        </div>
+                                    </div>
                           <!-- Follower cannnot Delete the photo of the user -->
                     </div>
                       <!-- Post Photo -->
@@ -84,12 +100,13 @@ while ($f = mysqli_fetch_array($following_post)) {
                       <div class="post-footer">
                          <div class="post-actions">
                              <div class="post-like">
-                               <form action="" method="POST">
-                                 <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_like_id">
-                                 <button type="submit" name="like">
-                                   <i class="dill ion-android-favorite"></i>
-                                 </button>
-                               </form>
+                             <!-- <form action="" method="POST"> -->
+                             <input type="hidden" class="u-id" value="<?php echo $person_id[$c];?>">
+                                           <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_like_id">
+                                           <button type="button" class="like"  name="like" data-id="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>">
+                                             <i class="dill ion-android-favorite"></i>
+                                           </button>
+                                         <!-- </form> -->
                              </div>
                              <div class="post-comment">
                                <form action="" method="POST">
@@ -125,5 +142,9 @@ while ($f = mysqli_fetch_array($following_post)) {
       }
   ?>
     </section>
+    <script type="text/javascript" src="assets/js/jquery.js">
+    </script>
+    <script type="text/javascript" src="assets/js/app.js">
+    </script>
 </body>
 </html>

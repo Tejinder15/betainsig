@@ -81,6 +81,18 @@ while ($f = mysqli_fetch_array($post_dis)) {
                                   </div>
                                     <!-- For Post Options -->
                                     <!-- Follower cannnot Delete the photo of the user -->
+                                    <div class="post-options">
+                                        <div class="dropbtn"><i class="op ion-android-more-vertical"></i></div>
+                                        <div class="dropdown-content">
+                                            <form action="" method="POST">
+                                                <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_id">
+                                                <input type="hidden" value="<?php echo $allfile[$c]; //This Fetches Image id from Table?>" name="post_name">
+                                                <!-- <input type="submit" value="Status" name="stat"> -->
+                                                <!-- <input type="submit" value="Delete" name="del"> -->
+                                                <button type="button" name="button" class="repo" data-st="<?php echo $pic_id[$c]; ?>">Report</button>
+                                            </form>
+                                        </div>
+                                    </div>
                               </div>
                                 <!-- Post Photo -->
                                 <div class="post-photo">

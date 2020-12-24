@@ -30,7 +30,7 @@ $num_of_followers = mysqli_num_rows($Follower_query);
 //For the Directory of the user
 $direc_name = $myname;
 $direct = "users_data"."/".$direc_name."/";
-// For Fetching Profile Photo of the
+// For Fetching Profile Photo of the user
 $dp = array();
 $profile_query = mysqli_query($con,"SELECT * from `users` where `Id`='$myid'");
 while($row = mysqli_fetch_assoc($profile_query)){
@@ -40,16 +40,20 @@ while($row = mysqli_fetch_assoc($profile_query)){
 }
 $profile_dp = implode("",$dp);
 
+
 // For Retrieving Images from mysql Table
 $post_dis = mysqli_query($con,"SELECT * from `posts` where `user_id`='$myid'");
+$post_path = array();
 $pic_id = array();
 $allfile = array();
 while ($f = mysqli_fetch_array($post_dis)) {
     if ($f!='..' && $f!='.') {
         $allfile[] = $f['post_name'];
+        $post_path[] = $f['post_path'];
         $pic_id[] = $f['id'];
     }
 }
+$total_post = count($allfile);
 
 // For Uploading Posts(Photos)
 $errors= array();
@@ -125,7 +129,7 @@ if(isset($_POST['upload'])){
                 <div class="profile-photo">
                     <img src="<?php
                         echo $profile_dp;
-                    ?>" alt=""  width="100%" height="140" style="border-radius:50%">
+                    ?>" >
                     <div class="pp">
                       <button class="prof_btn" onclick="document.location.href='settings.php?id=<?php echo $myid;?>';">
                         <i class="ion-camera"></i>
@@ -203,7 +207,7 @@ if(isset($_POST['upload'])){
                 echo "<tr>";
                 for ($i=0; $i <$col && $c<$totalimages; $i++) {
                     ?>
-                    <div class="post"><a href="pictures.php?id=<?php echo $myid;?>"><img src="<?php echo $direct. $allfile[$c];?>" width="100%" height="230"></a></div>
+                    <div class="post"><a href="pictures.php?id=<?php echo $myid;?>"><img src="<?php echo $post_path[$c]. $allfile[$c];?>" width="100%" height="230"></a></div>
                     <?php
                     $c++;
                 }

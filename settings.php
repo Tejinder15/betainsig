@@ -120,6 +120,7 @@ if(isset($_POST['update'])){
                   </div>
                 </div>
                 <div>
+                <!--Upload Photo-->
                   <input type="submit" value="Upload Photo" name="up" class="btnSubmit" onClick="hideUploadOption();"/>
                 </div>
               </form>

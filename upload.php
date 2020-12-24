@@ -18,7 +18,7 @@ if(is_array($_FILES)) {
 		$extension = explode("/", $_FILES["userImage"]["type"]);
 		$targetPath = "profiles"."/".$myname."."."$extension[1]";
 		$img_name = $myname."."."$extension[1]";
-		$img_query = mysqli_query($con,"UPDATE users set `profile_pic`= '$targetPath',`profile_name`= '$img_name' where `Username`= $my_name");
+		$img_query = mysqli_query($con,"UPDATE users set `profile_pic`= '$targetPath',`profile_name`= '$img_name' where `Id`='$id'");
 		if(move_uploaded_file($sourcePath,$targetPath)) {
 			header("Location:bio.php");	
 ?>
