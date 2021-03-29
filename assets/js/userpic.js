@@ -39,4 +39,44 @@ $(document).ready(function(){
       }
     });
   });
+
+  // For posting comments
+  $(document).on("click",".comment",function(e){
+    e.preventDefault();
+    var pic = $(this).data("com");
+    var comval = $(this).siblings('.write-comment').val();
+    $.ajax({
+      url:"includes/comment.php",
+      type:"POST",
+      data:{com:pic,commenter:lid,coment:comval},
+      success:function(data){
+        if(data==1){
+          alert("Comment Posted Successfully.");
+          location.reload();
+        }else{
+          alert("Sorry Could Not Post the comment");
+          alert(data);
+        }
+      }
+    });
+  });
+
+  // For Saving Post
+  $(document).on("click",".sav_act",function(e){
+    e.preventDefault();
+    var psv = $(this).data("sv");
+    $.ajax({
+      url: "includes/save.php",
+      type: "POST",
+      data:{sv:psv,saver:lid},
+      success:function(data){
+        if(data==1){
+          alert("Saved Successfully");
+        }else{
+          alert("Sorry could not save");
+          alert(data);
+        }
+      }
+    });
+  });
 });

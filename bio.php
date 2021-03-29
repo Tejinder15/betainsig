@@ -145,6 +145,7 @@ if(isset($_POST['upload'])){
                     </button>
                     <div id="myDropdown" class="dropdown-content">
                         <a href="settings.php?id=<?php echo $myid;?>"><i class="ion-settings"></i> Settings</a>
+                        <a href="saved.php?id=<?php echo $myid;?>"><i class="ion-android-bookmark"></i> Saved</a>
                         <a href="logout.php"><i class="ion-log-out"></i> Logout</a>
                     </div>
                     <br>

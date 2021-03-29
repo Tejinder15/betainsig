@@ -54,7 +54,7 @@ while ($f = mysqli_fetch_array($following_query)) {
                     </div>
                     <div class="option">
                         <form action="" method="post">
-                            <input type="submit" value="Unfollow" name="unfollow" class="unfo">
+                            <input type="submit" value="Follow" name="follow" class="unfo">
                         </form>
                     </div>
                 </div>

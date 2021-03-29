@@ -135,10 +135,20 @@ if(isset($_POST['del'])){
                                                 <!-- <input type="submit" value="Status" name="stat"> -->
                                                 <!-- <input type="submit" value="Delete" name="del"> -->
                                                 <button type="button" name="button" class="stbtn" data-st="<?php echo $pic_id[$c]; ?>"><i class="ion-stats-bars"></i> Status</button>
+                                                <button class="edit" data-ed="<?php echo $pic_id[$c]; ?>"><i class="ion-edit"></i> Edit</button>
                                                 <button type="submit" name="del" data-id="<?php echo $pic_id[$c];?>" name="del"><i class="ion-trash-b"></i> Delete</button>
                                             </form>
                                         </div>
                                     </div>
+                                    <div id="myModal" class="modal">
+                                                <!-- Modal content -->
+                                                  <div class="modal-content">
+                                                    <span class="close">&times;</span>
+                                                      <p>Edit caption</p>
+                                                      <input type="text" name="modcap" class="modifycap">
+                                                      <button>Edit</button>
+                                                  </div>
+                                                </div>
                               </div>
                                 <!-- Post Photo -->
                                 <div class="post-photo">
@@ -159,7 +169,7 @@ if(isset($_POST['del'])){
                                        </div>
                                        <div class="post-comment">
                                          <form action="" method="POST">
-                                           <button  name="comment" class="comment">
+                                           <button  name="comment" class="pos-comment">
                                              <i class="ion-chatbox-working"></i>
                                            </button>
                                          </form>
@@ -177,6 +187,46 @@ if(isset($_POST['del'])){
                                  <b><span class="caption"><?php echo $myname; ?></span></b>
                                  <span><?php echo $pic_cap[$c];?></span>
                                </div>
+
+                                    <div class="see-comments">
+                                      <button class="tap-comment">Comments</button>
+                                      <div class="display-comment">
+                                      <?php
+                                      $com_query = mysqli_query($con,"SELECT comments.*,users.*  from `comments` JOIN `users` ON comments.`commenters_id`= users.`Id` where `post_id`='$pic_id[$c]'");
+                                      $commner = array();
+                                      $com = array();
+                                      $comprofile = array();
+                                      while ($f = mysqli_fetch_array($com_query)) {
+                                        if ($f!='..' && $f!='.') {
+                                            $commner[] = $f["Username"];
+                                            $com[] = $f['comment'];
+                                            $comprofile[] = $f["profile_pic"];
+                                        }
+                                        // print_r($commner);
+                                        // print_r($com);
+                                    }
+                                    if(isset($commner)){
+                                      $totalcomments = count($commner);
+                                      $x = 0;
+                                    for($m = 0;$m<$totalcomments;$m++){
+                                        ?>
+                                        <div class="commenter-info">
+                                          <div class="commenter-profile">
+                                            <img src="<?php echo $comprofile[$x];?>" alt="">
+                                          </div>
+                                          <div class="name-and-comment">
+                                            <p class="commenters-name"><?php echo $commner[$x];?></p>
+                                            <p class="commenters-comment"><?php echo $com[$x];?></p>
+                                        </div>
+                                        </div>
+                                        <?php
+                                        // echo $x;
+                                        $x++;
+                                    }
+                                  }
+                                      ?>
+                                      </div>
+                                    </div>
                            </div>
                         <?php
                         $c++;

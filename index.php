@@ -50,6 +50,7 @@ while ($f = mysqli_fetch_array($following_post)) {
             <a href="favorite.php?id=<?php echo $myid;?>"><i class="ion-android-favorite"></i></a>
             <a href="message.php?id=<?php echo $myid;?>"><i class="ion-ios-paperplane"></i></a>
             <a href="bio.php?id=<?php echo $myid;?>"><i class="ion-person"></i></a>
+            <a href="store.php?id=<?php echo $myid;?>"><i class="ion-bag"></i></a>
           </div>
     </nav>
 
@@ -101,12 +102,11 @@ while ($f = mysqli_fetch_array($following_post)) {
                          <div class="post-actions">
                              <div class="post-like">
                              <!-- <form action="" method="POST"> -->
-                             <input type="hidden" class="u-id" value="<?php echo $person_id[$c];?>">
-                                           <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_like_id">
-                                           <button type="button" class="like"  name="like" data-id="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>">
-                                             <i class="dill ion-android-favorite"></i>
-                                           </button>
-                                         <!-- </form> -->
+                                <input type="hidden" class="u-id" value="<?php echo $person_id[$c];?>">
+                                <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_like_id">
+                                <button type="button" class="like"  name="like" data-id="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>">
+                                  <i class="dill ion-android-favorite"></i>
+                                </button>
                              </div>
                              <div class="post-comment">
                                <form action="" method="POST">
@@ -123,17 +123,58 @@ while ($f = mysqli_fetch_array($following_post)) {
                                </form>
                              </div>
                          </div>
+                         <!--For using the dropdown idea-->
                          <div class="post-save">
-                             <button class="sav_act">
-                                 <i class="ion-ios-download-outline"></i>
-                             </button>
-                             <div class="save-options">
-                               <form class="" action="index.html" method="post">
-                                 <button type="submit" name="save"><i class="ion-android-bookmark"></i> Save</button>
-                                 <button type="submit" name="download"><i class="ion-ios-cloud-download"></i> Download</button>
-                               </form>
-                             </div>
-                         </div>
+                                       <button class="sav_act" data-sv="<?php echo $pic_id[$c];?>">
+                                           <i class="ion-android-bookmark"></i>
+                                       </button>
+                                   </div>
+          </div>
+
+                         <div class="comment-section">
+                                <input type="text" name="comment-post" class="write-comment" placeholder="Comment" autocomplete="off">
+                                <button class="comment" data-com="<?php echo $pic_id[$c];?>">Comment</button>
+                          </div>
+
+
+                            <div class="see-comments">
+                              <button class="tap-comment">Comments</button>
+                                 <div class="display-comment">
+                                    <?php
+                                      $com_query = mysqli_query($con,"SELECT comments.*,users.*  from `comments` JOIN `users` ON comments.`commenters_id`= users.`Id` where `post_id`='$pic_id[$c]'");
+                                      $commner = array();
+                                      $com = array();
+                                      $comprofile = array();
+                                      while ($f = mysqli_fetch_array($com_query)) {
+                                        if ($f!='..' && $f!='.') {
+                                            $commner[] = $f["Username"];
+                                            $com[] = $f['comment'];
+                                            $comprofile[] = $f["profile_pic"];
+                                        }
+                                        // print_r($commner);
+                                        // print_r($com);
+                                    }
+                                    if(isset($commner)){
+                                      $totalcomments = count($commner);
+                                      $x = 0;
+                                     for($m = 0;$m<$totalcomments;$m++){
+                                         ?>
+
+                                      <div class="commenter-info">
+                                        <div class="commenter-profile">
+                                            <img src="<?php echo $comprofile[$x];?>" alt="">
+                                        </div>
+                                        <div class="name-and-comment">
+                                            <p class="commenters-name"><?php echo $commner[$x];?></p>
+                                            <p class="commenters-comment"><?php echo $com[$x];?></p>
+                                         </div>
+                                        </div> 
+                                         <?php
+                                        $x++;
+                                    }
+                                  }
+                                     ?>
+                                     </div>
                      </div>
                  </div>
               <?php
@@ -146,5 +187,6 @@ while ($f = mysqli_fetch_array($following_post)) {
     </script>
     <script type="text/javascript" src="assets/js/app.js">
     </script>
+    <script type="text/javascript" src="assets/js/userpic.js"></script>
 </body>
 </html>

@@ -29,15 +29,15 @@ $post_dis = mysqli_query($con,"SELECT * from `posts` where `user_id` = '$userid'
 $pic_id = array();
 $allfile = array();
 $pic_cap = array();
+$likes = array();
 while ($f = mysqli_fetch_array($post_dis)) {
     if ($f!='..' && $f!='.') {
         $allfile[] = $f['post_name'];
         $pic_id[] = $f['id'];
         $pic_cap[] = $f['post_caption'];
+        $likes[] = $f['likes'];
     }
 }
-
-// For Liking the Post of the User
 
  ?>
 <!DOCTYPE html>
@@ -76,7 +76,6 @@ while ($f = mysqli_fetch_array($post_dis)) {
                                     </div>
                                     <div class="post-username">
                                       <label for="" class="person"><?php echo $myname;?></label>
-                                      <label for=""><?php echo $pic_id[$c]; ?></label>
                                     </div>
                                   </div>
                                     <!-- For Post Options -->
@@ -102,6 +101,9 @@ while ($f = mysqli_fetch_array($post_dis)) {
                                 </div>
                                 <!-- Post Sharing And Like Options -->
                                 <div class="post-footer">
+                                <div class="num-of-likes">
+                                <p class="likes"><?php echo $likes[$c];?></p>
+                                </div>
                                    <div class="post-actions">
                                        <div class="post-like">
                                          <form action="" method="POST">
@@ -112,11 +114,9 @@ while ($f = mysqli_fetch_array($post_dis)) {
                                          </form>
                                        </div>
                                        <div class="post-comment">
-                                         <form action="" method="POST">
-                                           <button type="submit" name="comment">
+                                           <button class="pos-comment">
                                              <i class="ion-chatbox-working"></i>
                                            </button>
-                                         </form>
                                        </div>
                                        <div class="post-share">
                                          <form action="" method="POST">
@@ -126,23 +126,63 @@ while ($f = mysqli_fetch_array($post_dis)) {
                                          </form>
                                        </div>
                                    </div>
+
+                                   <!--For using the dropdown idea-->
                                    <div class="post-save">
-                                       <button class="sav_act">
-                                           <i class="ion-ios-download-outline"></i>
+                                       <button class="sav_act" data-sv="<?php echo $pic_id[$c];?>">
+                                           <i class="ion-android-bookmark"></i>
                                        </button>
-                                       <div class="save-options">
-                                         <form class="" action="index.html" method="post">
-                                           <button type="submit" name="save"><i class="ion-android-bookmark"></i> Save</button>
-                                           <button type="submit" name="download"><i class="ion-ios-cloud-download"></i> Download</button>
-                                         </form>
-                                       </div>
                                    </div>
-                               </div>
-                               <div class="post-caption">
-                                 <b><span class="caption"><?php echo $myname; ?></span></b>
+                                   </div>
+                                   <div class="post-caption">
+                                 <b><p class="caption"><?php echo $myname; ?></p></b>
                                  <span><?php echo $pic_cap[$c];?></span>
                                </div>
-                           </div>
+
+                                   <div class="comment-section">
+                                             <input type="text" name="comment-post" class="write-comment" placeholder="Comment" autocomplete="off">
+                                             <button class="comment" data-com="<?php echo $pic_id[$c];?>">Comment</button>
+                                    </div>
+                                    <div class="see-comments">
+                                      <button class="tap-comment">Comments</button>
+                                      <div class="display-comment">
+                                      <?php
+                                      $com_query = mysqli_query($con,"SELECT comments.*,users.*  from `comments` JOIN `users` ON comments.`commenters_id`= users.`Id` where `post_id`='$pic_id[$c]'");
+                                      $commner = array();
+                                      $com = array();
+                                      $comprofile = array();
+                                      while ($f = mysqli_fetch_array($com_query)) {
+                                        if ($f!='..' && $f!='.') {
+                                            $commner[] = $f["Username"];
+                                            $com[] = $f['comment'];
+                                            $comprofile[] = $f["profile_pic"];
+                                        }
+                                        // print_r($commner);
+                                        // print_r($com);
+                                    }
+                                    if(isset($commner)){
+                                      $totalcomments = count($commner);
+                                      $x = 0;
+                                    for($m = 0;$m<$totalcomments;$m++){
+                                        ?>
+                                        <div class="commenter-info">
+                                          <div class="commenter-profile">
+                                            <img src="<?php echo $comprofile[$x];?>" alt="">
+                                          </div>
+                                          <div class="name-and-comment">
+                                            <p class="commenters-name"><?php echo $commner[$x];?></p>
+                                            <p class="commenters-comment"><?php echo $com[$x];?></p>
+                                          </div>
+                                        </div>
+                                        <?php
+                                        // echo $x;
+                                        $x++;
+                                    }
+                                  }
+                                      ?>
+                                      </div>
+                                    </div>
+                               </div>
                         <?php
                         $c++;
                     }

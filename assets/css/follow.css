@@ -95,4 +95,9 @@ nav{
     border: none;
     border-radius: 3px;
     padding: 6px 8px;
+    cursor: pointer;
+}
+
+.unfo:hover{
+    background-color: #c0392b;
 }

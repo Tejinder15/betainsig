@@ -45,4 +45,12 @@ $(document).ready(function(){
     e.preventDefault();
   });
 
+  $(document).on("click",".edit",function(e){
+    e.preventDefault();
+    var modal = $(".modal").style.display = "block"; 
+  });
+
+  // For displaying Comments
+  
+
 });

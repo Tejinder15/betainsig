@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around; /* Creating a space between the logo and the categories */
+  align-items: center;
+  min-height: 8vh;
+  background-color: #7f00ff;
+  box-shadow: 5px 5px 12px -4px rgba(0, 0, 0, 0.5);
+}
+
+.logo h1 {
+  font-size: 2em;
+  letter-spacing: 2px;
+  font-family: "Lobster", cursive;
+  color: white;
+  margin-left: 30px;
+  align-self: center;
+}
+
+.navbar {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 20%;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 22px;
+  width: 40px;
+}
+
+.navbar a:hover {
+  font-size: 32px;
+}
+
+.navbar .active {
+  color: #ff007f;
+}
+
+.main {
+  width: 70%;
+  height: auto;
+  background-color: hotpink;
+  padding: 1.2rem;
+  margin: auto;
+}
+
+.store-art {
+  width: 100%;
+  height: 50vh;
+  background-color: aqua;
+}
+
+.store-owner {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+  top: 14.4rem;
+  left: 1.3rem;
+  background-color: darkorange;
+}
+
+.product-container {
+  height: auto;
+  width: 100%;
+  background-color: violet;
+}
+
+#pic-upload {
+  display: block;
+  position: relative;
+  top: 10rem;
+  margin: auto;
+}
+
+/* Second Nav bar*/
+.nav2 {
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #7f00ff;
+  position: absolute;
+  bottom: 0;
+}
+
+.add-prod {
+  background-color: transparent;
+  height: 4vh;
+  width: 4vh;
+  border: none;
+}
+
+.add-prod i {
+  font-size: 1.8rem;
+  color: white;
+}
+
+.add-prod i:hover {
+  color: #ff007f;
+}
