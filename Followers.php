@@ -35,6 +35,7 @@ while ($f = mysqli_fetch_array($following_query)) {
     </nav>
 
     <section class="main">
+        <input type="hidden" id="user" value="<?php echo $myid;?>">
         <?php
 
         if (isset($following_names)) {
@@ -53,9 +54,7 @@ while ($f = mysqli_fetch_array($following_query)) {
                         <span><?php echo $following_names[$c];?></span>
                     </div>
                     <div class="option">
-                        <form action="" method="post">
-                            <input type="submit" value="Follow" name="follow" class="unfo">
-                        </form>
+                            <button class="fol" data-fo="<?php echo $follower_id[$c];?>">Follow</button>
                     </div>
                 </div>
                 <?php
@@ -63,5 +62,7 @@ while ($f = mysqli_fetch_array($following_query)) {
         }
         ?>
     </section>
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/unfollow.js"></script>
 </body>
 </html>
