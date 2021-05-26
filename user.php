@@ -79,17 +79,6 @@ while ($f = mysqli_fetch_array($post_dis)) {
                 array_push($msg,"Already Following!.<br>");
             }
     }
-
-    if (isset($_POST['unfollow'])) {
-        $check2_query = mysqli_query($con,"SELECT * from followers Where `user_id`='$followerid' AND `follower_id`='$userid'");
-        $check2_result = mysqli_num_rows($check2_query);
-            if ($check2_result> 0) {
-                $query4 = mysqli_query($con,"DELETE FROM followers WHERE `user_id`='$userid' AND `follower_id`='$userid'");
-                echo 'Unfollowed the user';
-            }
-            $isFollowing = False;
-    }
-
 ?>
 
 <!DOCTYPE html>
@@ -120,7 +109,7 @@ while ($f = mysqli_fetch_array($post_dis)) {
                   ?>" alt=""  width="100%" height="140" style="border-radius:50%">
                 </div>
               </div>
-        </div>
+            </div>
           <div class="bio-details">
               <div class="bio-name">
                   <span><?php echo "$user_name";?></span>
@@ -131,15 +120,12 @@ while ($f = mysqli_fetch_array($post_dis)) {
                 <a href="Followers.php?id=<?php echo $myid;?>"><b><?php echo $num_of_followers;?></b>Followers</a>
                 <a href="Following.php?id=<?php echo $myid;?>"><b><?php echo $num_of_following;?></b>Following</a>
               </div>
+
+              <div class="follow-form">
               <form action="" method="post">
-                  <?php
-                      if ($isFollowing) {
-                          echo '<input type="submit" name="unfollow" value="Unfollow" class="followbtn">';
-                      }else{
-                          echo '<input type="submit" name="follow" value="Follow" class="followbtn">';
-                      }
-                  ?>
+                <input type="submit" name="follow" value="Follow" class="followbtn">
               </form>
+              </div>
           </div>
       </div>
 
