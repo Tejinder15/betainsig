@@ -28,10 +28,9 @@ $usid = $_GET['id'];
         
         <div class="navbar">
             <a href="mno.php?id=<?php echo $usid;?>"><i class="ion-home"></i></a> 
-            <a class="active" href="#"><i class="ion-android-search"></i></a> 
-            <a href="favorite.php?id=<?php echo $usid;?>"><i class="ion-android-favorite"></i></a> 
-            <a href="message.php?id=<?php echo $usid;?>"><i class="ion-ios-paperplane"></i></a>
-            <a href="bio.php?id=<?php echo $usid;?>"><i class="ion-person"></i></a>
+            <a class="active" href="#" title="search"><i class="ion-android-search"></i></a> 
+            <a href="favorite.php?id=<?php echo $usid;?>" title="notify"><i class="ion-android-favorite"></i></a> 
+            <a href="bio.php?id=<?php echo $usid;?>" title="bio"><i class="ion-person"></i></a>
           </div>
 
     </nav>

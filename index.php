@@ -46,11 +46,9 @@ while ($f = mysqli_fetch_array($following_post)) {
         </div>
         <div class="navbar">
             <a class="active" href="#"><i class="ion-home"></i></a>
-            <a href="search.php?id=<?php echo $myid;?>"><i class="ion-android-search"></i></a>
-            <a href="favorite.php?id=<?php echo $myid;?>"><i class="ion-android-favorite"></i></a>
-            <a href="message.php?id=<?php echo $myid;?>"><i class="ion-ios-paperplane"></i></a>
-            <a href="bio.php?id=<?php echo $myid;?>"><i class="ion-person"></i></a>
-            <a href="store.php?id=<?php echo $myid;?>"><i class="ion-bag"></i></a>
+            <a href="search.php?id=<?php echo $myid;?>" title="search"><i class="ion-android-search"></i></a>
+            <a href="favorite.php?id=<?php echo $myid;?>" title="notify"><i class="ion-android-favorite"></i></a>
+            <a href="bio.php?id=<?php echo $myid;?>" title="bio"><i class="ion-person"></i></a>
           </div>
     </nav>
 
@@ -107,20 +105,6 @@ while ($f = mysqli_fetch_array($following_post)) {
                                 <button type="button" class="like"  name="like" data-id="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>">
                                   <i class="dill ion-android-favorite"></i>
                                 </button>
-                             </div>
-                             <div class="post-comment">
-                               <form action="" method="POST">
-                                 <button type="submit" name="comment">
-                                   <i class="ion-chatbox-working"></i>
-                                 </button>
-                               </form>
-                             </div>
-                             <div class="post-share">
-                               <form action="" method="POST">
-                                 <button type="submit" name="messg">
-                                   <i class="ion-paper-airplane"></i>
-                                 </button>
-                               </form>
                              </div>
                          </div>
                          <!--For using the dropdown idea-->

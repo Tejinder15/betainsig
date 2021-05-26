@@ -113,11 +113,10 @@ if(isset($_POST['upload'])){
         </div>
 
         <div class="navbar">
-            <a href="index.php?id=<?php echo $myid;?>"><i class="ion-home"></i></a>
-            <a href="search.php?id=<?php echo $myid;?>"><i class="ion-android-search"></i></a>
-            <a href="favorite.php?id=<?php echo $myid;?>"><i class="ion-android-favorite"></i></a>
-            <a href="message.php?id=<?php echo $myid;?>"><i class="ion-ios-paperplane"></i></a>
-            <a href="#" class="active"><i class="ion-person"></i></a>
+            <a href="index.php?id=<?php echo $myid;?>" ><i class="ion-home"></i></a>
+            <a href="search.php?id=<?php echo $myid;?>" title="search"><i class="ion-android-search"></i></a>
+            <a href="favorite.php?id=<?php echo $myid;?>" title="notify"><i class="ion-android-favorite"></i></a>
+            <a href="#" class="active" title="bio"><i class="ion-person"></i></a>
           </div>
     </nav>
 

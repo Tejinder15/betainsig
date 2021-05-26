@@ -322,7 +322,9 @@ li a:hover:not(.active) {
 .display-comment {
   display: none;
   width: 100%;
-  height: 200px;
+  min-height: auto;
+  max-height: 150px;
+  overflow-y: auto;
   padding-top: 8px;
 }
 

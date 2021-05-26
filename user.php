@@ -108,14 +108,6 @@ while ($f = mysqli_fetch_array($post_dis)) {
         <div class="logo">
             <h1>Insignia</h1>
         </div>
-
-        <div class="navbar">
-            <a href=""><i class="ion-home"></i></a>
-            <a href="search.php"><i class="ion-android-search"></i></a>
-            <a href="favorite.php"><i class="ion-android-favorite"></i></a>
-            <a href="message.php"><i class="ion-ios-paperplane"></i></a>
-            <a href="bio.php"><i class="ion-person"></i></a>
-          </div>
     </nav>
 
     <section class="main">
