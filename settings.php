@@ -97,7 +97,6 @@ if(isset($_POST['update'])){
             <a href="mno.php"><i class="ion-home"></i></a>
             <a href="search.php"><i class="ion-android-search"></i></a>
             <a href="favorite"><i class="ion-android-favorite"></i></a>
-            <a href="message.php"><i class="ion-ios-paperplane"></i></a>
             <a href="#" class="active"><i class="ion-person"></i></a>
           </div>
     </nav>
@@ -135,13 +134,6 @@ if(isset($_POST['update'])){
             <form class="" action="" method="post">
             <input type="text" name="username" value="" placeholder="" autocomplete="off"><br>
             <label for="Message" id="msg"></label>
-          </div>
-          <div class="type">
-            <label for="">Type of Account</label>
-            <select class="" name="status">
-              <option value="">Public</option>
-              <option value="">Private</option>
-            </select>
           </div>
           <input type="submit" name="update" value="Update" id="up">
         </form>

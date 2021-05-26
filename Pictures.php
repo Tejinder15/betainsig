@@ -157,32 +157,6 @@ if(isset($_POST['del'])){
                                   </form>
                                 </div>
                                 <!-- Post Sharing And Like Options -->
-                                <div class="post-footer">
-                                   <div class="post-actions">
-                                       <div class="post-like">
-                                         <form action="" method="POST">
-                                           <input type="hidden" value="<?php echo $pic_id[$c]; //This Fetches Image id from Table?>" name="post_like_id">
-                                           <button name="like" class="like">
-                                             <i class="dill ion-android-favorite"></i>
-                                           </button>
-                                         </form>
-                                       </div>
-                                       <div class="post-comment">
-                                         <form action="" method="POST">
-                                           <button  name="comment" class="pos-comment">
-                                             <i class="ion-chatbox-working"></i>
-                                           </button>
-                                         </form>
-                                       </div>
-                                       <div class="post-share">
-                                         <form action="" method="POST">
-                                           <button name="messg" class="messag">
-                                             <i class="ion-paper-airplane"></i>
-                                           </button>
-                                         </form>
-                                       </div>
-                                   </div>
-                               </div>
                                <div class="post-caption">
                                  <b><span class="caption"><?php echo $myname; ?></span></b>
                                  <span><?php echo $pic_cap[$c];?></span>

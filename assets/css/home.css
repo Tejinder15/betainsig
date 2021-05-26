@@ -325,7 +325,7 @@ li a:hover:not(.active) {
   min-height: auto;
   max-height: 150px;
   overflow-y: auto;
-  padding-top: 8px;
+  /* padding-top: 8px; */
 }
 
 .tap-comment:focus + .display-comment {
